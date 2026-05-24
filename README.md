@@ -231,7 +231,7 @@ Implemented for:
 
 The application follows a modular full-stack architecture designed for scalability, maintainability, and performance optimization.
 
-
+```text
 ┌─────────────────────────────┐
 │        React Frontend       │
 │  Dashboard UI + Charts UI  │
@@ -574,16 +574,16 @@ GET /traffic/countries/paginated?page=1&limit=3
 
 The easiest way to run the complete application is through Docker Compose. This starts the frontend, backend, PostgreSQL, and Redis together.
 
-
+```bash
 docker compose up --build
-
+```
 
 After startup, open:
 
-
+```text
 Frontend: http://localhost:5173
 Backend:  http://localhost:4000
-
+```
 
 Docker automatically handles:
 - PostgreSQL container startup
@@ -595,13 +595,13 @@ Docker automatically handles:
 
 To stop all containers:
 
-
+```bash
 docker compose down
-
+```
 
 To reset database volume and reseed data:
 
-
+```bash
 docker compose down -v
 docker compose up --build
 ```
@@ -656,25 +656,25 @@ npm run start:dev
 
 Backend runs at:
 
-
+```text
 http://localhost:4000
-
+```
 
 ---
 
 ## Frontend Setup
 
-
+```bash
 cd frontend
 npm install --legacy-peer-deps
 npm run dev
-
+```
 
 Frontend runs at:
 
-
+```text
 http://localhost:5173
-
+```
 
 ---
 
@@ -682,17 +682,17 @@ http://localhost:5173
 
 ## Backend Tests
 
-
+```bash
 cd backend
 npm run test
-
+```
 
 ## Frontend Tests
 
-
+```bash
 cd frontend
 npm run test -- --run
-
+```
 
 ---
 
@@ -743,7 +743,9 @@ The project includes a complete Docker Compose setup with:
 
 This allows reviewers or developers to run the complete project with one command:
 
+```bash
 docker compose up --build
+```
 
 ---
 
@@ -775,4 +777,5 @@ The workflow runs automatically on push and pull request events.
 ---
 
 # Author
+
 Nancy Bhoot
