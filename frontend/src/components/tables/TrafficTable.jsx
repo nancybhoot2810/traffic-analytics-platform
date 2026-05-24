@@ -1,12 +1,29 @@
-import {
-  getCountryFlag,
-  getTrafficCount,
-} from "../../utils/countryUtils";
+import { useEffect, useState } from "react";
+import { getPaginatedCountries } from "../../api/traffic";
+import { getTrafficCount, getCountryCode } from "../../utils/countryUtils";
 
-function TrafficTable({ data }) {
-  const sortedData = [...data].sort(
-    (a, b) => getTrafficCount(b) - getTrafficCount(a)
-  );
+function TrafficTable() {
+  const [page, setPage] = useState(1);
+  const [rows, setRows] = useState([]);
+  const [meta, setMeta] = useState({
+    page: 1,
+    limit: 3,
+    totalItems: 0,
+    totalPages: 1,
+    hasNextPage: false,
+    hasPreviousPage: false,
+  });
+
+  const loadCountries = async () => {
+    const result = await getPaginatedCountries(page, 3);
+
+    setRows(result.data || []);
+    setMeta(result.meta || {});
+  };
+
+  useEffect(() => {
+    loadCountries();
+  }, [page]);
 
   return (
     <div className="tableCard">
@@ -25,20 +42,21 @@ function TrafficTable({ data }) {
           <span>Last Updated</span>
         </div>
 
-        {sortedData.map((item, index) => {
-          const count = getTrafficCount(item);
-          const trend = index === sortedData.length - 1 ? "↓ 3%" : index === 1 ? "↑ 5%" : "↑ 12%";
-          const trendClass = trend.includes("↓") ? "trendDown" : "trendUp";
+        {rows.map((item, index) => {
+          const trend = index === 2 ? "-3%" : index === 1 ? "5%" : "12%";
+          const isNegative = trend.startsWith("-");
 
           return (
             <div className="tableRow" key={item.country}>
               <span>
-                {getCountryFlag(item.country)} {item.country}
+                <strong>{getCountryCode(item.country)}</strong> {item.country}
               </span>
 
-              <span>{count.toLocaleString()}</span>
+              <span>{getTrafficCount(item).toLocaleString()}</span>
 
-              <span className={trendClass}>{trend}</span>
+              <span className={isNegative ? "trendDown" : "trendUp"}>
+                {isNegative ? "↓" : "↑"} {trend.replace("-", "")}
+              </span>
 
               <span>2 min ago</span>
             </div>
@@ -46,7 +64,25 @@ function TrafficTable({ data }) {
         })}
       </div>
 
-      <button className="viewBtn">View All Countries →</button>
+      <div className="paginationControls">
+        <button
+          onClick={() => setPage((current) => current - 1)}
+          disabled={!meta.hasPreviousPage}
+        >
+          Prev
+        </button>
+
+        <span>
+          Page {meta.page || 1} of {meta.totalPages || 1}
+        </span>
+
+        <button
+          onClick={() => setPage((current) => current + 1)}
+          disabled={!meta.hasNextPage}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }

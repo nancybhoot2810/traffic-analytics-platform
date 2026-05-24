@@ -21,12 +21,12 @@ const menuItems = [
   { name: "Settings", icon: <FaCog /> },
 ];
 
-function Sidebar({ isOpen, onClose }) {
+function Sidebar({ isOpen, onClose, onMenuSelect, activeSection }) {
   return (
     <aside className={`sidebar ${isOpen ? "sidebarOpen" : ""}`}>
       <div className="sidebarTop">
         <div className="sidebarMobileHeader">
-          <div className="logoSection">
+          <div className="logoSection" onClick={onClose}>
             <div className="trafficLights">
               <span className="red"></span>
               <span className="yellow"></span>
@@ -35,18 +35,17 @@ function Sidebar({ isOpen, onClose }) {
 
             <h2>Traffic Analytics</h2>
           </div>
-
-          <button className="closeSidebar" onClick={onClose}>
-            <FaTimes />
-          </button>
         </div>
 
         <nav className="menu">
           {menuItems.map((item) => (
             <button
               key={item.name}
-              className={`menuItem ${item.active ? "activeMenu" : ""}`}
-              onClick={onClose}
+              className={`menuItem ${activeSection === item.name ? "activeMenu" : ""}`}
+              onClick={() => {
+                onMenuSelect?.(item.name);
+                onClose();
+              }}
             >
               <span className="menuIcon">{item.icon}</span>
               <span>{item.name}</span>

@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 
 import { TrafficService } from './traffic.service';
@@ -48,5 +49,16 @@ export class TrafficController {
   @Delete(':id')
   deleteTraffic(@Param('id', ParseIntPipe) id: number) {
     return this.trafficService.deleteTraffic(id);
+  }
+
+  @Get('countries/paginated')
+  getPaginatedCountries(
+    @Query('page') page = '1',
+    @Query('limit') limit = '3',
+  ) {
+    return this.trafficService.getPaginatedCountries(
+      Number(page),
+      Number(limit),
+    );
   }
 }

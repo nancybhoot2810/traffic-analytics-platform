@@ -17,6 +17,24 @@ const GRADIENTS = [
   ["#fb923c", "#f97316"],
 ];
 
+function CustomTooltip({ active, payload, label }) {
+  if (!active || !payload || !payload.length) return null;
+
+  return (
+    <div className="customTooltip">
+      <div className="tooltipTitle">
+        <span className="tooltipDot"></span>
+        {label}
+      </div>
+
+      <div className="tooltipRow">
+        <span>Traffic Count</span>
+        <strong>{payload[0].value.toLocaleString()}</strong>
+      </div>
+    </div>
+  );
+}
+
 function CountryChart({ data }) {
   return (
     <div className="chartCard dashboardChartCard">
@@ -63,12 +81,12 @@ function CountryChart({ data }) {
               tickLine={false}
             />
 
-            <YAxis
-              tick={{ fill: "#94a3b8", fontSize: 12 }}
-              tickLine={false}
-            />
+            <YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} tickLine={false} />
 
-            <Tooltip cursor={{ fill: "transparent" }} />
+            <Tooltip
+              cursor={{ fill: "transparent" }}
+              content={<CustomTooltip />}
+            />
 
             <Bar dataKey="_sum.count" radius={[8, 8, 0, 0]} barSize={66}>
               <LabelList

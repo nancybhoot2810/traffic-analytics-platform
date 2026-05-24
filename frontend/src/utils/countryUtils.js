@@ -34,3 +34,20 @@ export const getCountryFlag = (countryName = "") => {
 export const getTrafficCount = (item) => {
   return item?._sum?.count || 0;
 };
+
+export const getCountryCode = (country) => {
+  const flags = {
+    India: "🇮🇳",
+    USA: "🇺🇸",
+    Canada: "🇨🇦",
+    Germany: "🇩🇪",
+    Australia: "🇦🇺",
+    France: "🇫🇷",
+    Brazil: "🇧🇷",
+    Japan: "🇯🇵",
+    China: "🇨🇳",
+    Russia: "🇷🇺",
+  };
+
+  return flags[country] || "🌍";
+};

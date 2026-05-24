@@ -111,6 +111,7 @@ button {
   align-items: center;
   gap: 12px;
   margin-bottom: 34px;
+  cursor: pointer;
 }
 
 .logoSection h2 {
@@ -512,22 +513,19 @@ body.light .dateDropdown {
 }
 
 .themeBtn,
-.menuToggle,
-.closeSidebar {
+.menuToggle
+{
   width: 42px;
   height: 42px;
 
   border-radius: 12px;
 }
 
-.menuToggle,
-.closeSidebar {
+.menuToggle
+ {
   display: none;
 }
 
-.closeSidebar {
-  color: white;
-}
 
 .refreshBtn {
   height: 42px;
@@ -1171,6 +1169,177 @@ body.light .react-datepicker__day {
   outline: none !important;
 }
 
+.customTooltip {
+  min-width: 170px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #020617;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  color: #ffffff;
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.45);
+}
+
+.tooltipTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.tooltipDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #3b82f6;
+}
+
+.tooltipRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+.tooltipRow strong {
+  color: #ffffff;
+}
+
+.topCountriesCard {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.topCountriesContent {
+  flex: 1 !important;
+}
+
+.topCountriesCard .viewBtn {
+  margin-top: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding-top: 14px;
+}
+
+.paginationControls button {
+  border: 1px solid var(--border-color);
+  background: rgba(59, 130, 246, 0.14);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.paginationControls button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.paginationControls span {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.react-datepicker__day--disabled {
+  opacity: 0.28 !important;
+  cursor: not-allowed !important;
+  color: #64748b !important;
+}
+
+.react-datepicker__day--disabled:hover {
+  background: transparent !important;
+}
+
+.settingsPanel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.trafficForm {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.trafficForm input {
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0 12px;
+  outline: none;
+}
+
+.trafficForm button,
+.recordActions button {
+  border: none;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-weight: 800;
+  cursor: pointer;
+  background: #2563eb;
+  color: #fff;
+}
+
+.cancelBtn {
+  background: #64748b !important;
+}
+
+.recordsTable {
+  margin-top: 16px;
+}
+
+.recordsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.2fr;
+  gap: 12px;
+  align-items: center;
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.recordsHead {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-weight: 800;
+}
+
+.recordActions {
+  display: flex;
+  gap: 8px;
+}
+
+.recordActions button:last-child {
+  background: #ef4444;
+}
+
+@media (max-width: 900px) {
+  .trafficForm {
+    grid-template-columns: 1fr;
+  }
+
+  .recordsRow {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 900px) {
   .dashboardChartCard {
     min-height: auto !important;
@@ -1420,8 +1589,7 @@ body.light .react-datepicker__day {
     display: block;
   }
 
-  .menuToggle,
-  .closeSidebar {
+  .menuToggle{
     display: flex;
   }
 
@@ -1432,11 +1600,6 @@ body.light .react-datepicker__day {
     gap: 10px;
   }
 
-  .closeSidebar {
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-  }
 
   .dashboardHeader {
     flex-direction: column;
@@ -1593,5 +1756,146 @@ body.light .react-datepicker__day {
 
   .donutCenter h3 {
     font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardHeader {
+    align-items: flex-start;
+    gap: 12px;
+    padding-top: 8px;
+  }
+
+  .mobileTopRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .menuToggle {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 12px;
+    position: static;
+    flex-shrink: 0;
+  }
+
+  .mobileTopRow h1 {
+    font-size: 24px;
+    line-height: 1.1;
+  }
+
+  .mobileTopRow p {
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .headerActions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 10px;
+  }
+
+  .datePickerBox,
+  .dateRangeBox {
+    width: 100%;
+    min-width: 0;
+    height: 48px;
+  }
+
+  .iconBtn,
+  .themeBtn {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardLayout {
+    display: block;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .mainContent {
+    width: 100%;
+    margin-left: 0 !important;
+    padding: 16px 14px !important;
+    overflow-x: hidden;
+  }
+
+  .dashboardHeader {
+    width: 100%;
+  }
+
+  .mobileTopRow {
+    width: 100%;
+  }
+
+  .headerActions {
+    width: 100%;
+  }
+
+  .dateRangeBox,
+  .datePickerBox {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobileTopRow {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+
+  .menuToggle {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    transform: none !important;
+    margin: 0 !important;
+
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 14px !important;
+    z-index: 5 !important;
+  }
+
+  .mobileTopRow > div {
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .mobileTopRow h1 {
+    margin: 0 !important;
+    font-size: 24px !important;
+    line-height: 1.1 !important;
+  }
+
+  .mobileTopRow p {
+    margin-top: 5px !important;
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hideMenuToggle {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
   }
 }

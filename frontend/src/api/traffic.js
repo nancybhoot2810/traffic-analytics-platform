@@ -28,3 +28,34 @@ export const getVehicleTraffic = async (dateRange) => {
 
     return res.data;
 };
+
+export const getPaginatedCountries = async (page = 1, limit = 3) => {
+  const res = await axios.get(`${BASE_URL}/traffic/countries/paginated`, {
+    params: {
+      page,
+      limit,
+    },
+  });
+
+  return res.data;
+};
+
+export const getAllTraffic = async () => {
+  const res = await axios.get(`${BASE_URL}/traffic`);
+  return res.data;
+};
+
+export const createTraffic = async (payload) => {
+  const res = await axios.post(`${BASE_URL}/traffic`, payload);
+  return res.data;
+};
+
+export const updateTraffic = async (id, payload) => {
+  const res = await axios.put(`${BASE_URL}/traffic/${id}`, payload);
+  return res.data;
+};
+
+export const deleteTraffic = async (id) => {
+  const res = await axios.delete(`${BASE_URL}/traffic/${id}`);
+  return res.data;
+};

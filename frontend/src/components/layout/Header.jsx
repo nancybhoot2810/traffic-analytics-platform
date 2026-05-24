@@ -10,6 +10,7 @@ function Header({
   loading,
   dateRange,
   onDateRangeChange,
+  sidebarOpen
 }) {
   const { startDate, endDate } = dateRange;
 
@@ -25,7 +26,10 @@ function Header({
   return (
     <div className="dashboardHeader">
       <div className="mobileTopRow">
-        <button className="menuToggle" onClick={onMenuClick}>
+        <button
+          className={`menuToggle ${sidebarOpen ? "hideMenuToggle" : ""}`}
+          onClick={onMenuClick}
+        >
           <FaBars />
         </button>
 
@@ -41,13 +45,20 @@ function Header({
 
           <DatePicker
             selected={startDate}
-            onChange={handleDateChange}
+            onChange={(update) => {
+              handleDateChange(update);
+
+              if (update?.[0] && update?.[1]) {
+                document.activeElement?.blur();
+              }
+            }}
             startDate={startDate}
             endDate={endDate}
             selectsRange
-            shouldCloseOnSelect={false}
+            shouldCloseOnSelect={true}
             monthsShown={2}
             maxDate={new Date()}
+            filterDate={(date) => date <= new Date()}
             dateFormat="MMM d, yyyy"
             placeholderText="Select date range"
             className="datePickerInput"
