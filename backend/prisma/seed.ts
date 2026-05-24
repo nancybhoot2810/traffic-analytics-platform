@@ -3,6 +3,8 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.traffic.deleteMany();
+
   await prisma.traffic.createMany({
     data: [
       { country: 'Canada', vehicleType: 'Car', count: 120 },
@@ -17,9 +19,15 @@ async function main() {
       { country: 'Canada', vehicleType: 'Bike', count: 100 },
     ],
   });
+
+  console.log('Seed data inserted');
 }
 
 main()
-.then(() => console.log('Seeded successfully'))
-.catch((e) => console.error(e))
-.finally(async () => await prisma.$disconnect());
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

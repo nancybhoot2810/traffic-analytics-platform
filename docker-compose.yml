@@ -17,7 +17,7 @@ services:
     container_name: traffic-redis
     restart: always
     ports:
-      - "6379:6379"
+      - "6380:6379"
 
   backend:
     build:
@@ -25,7 +25,7 @@ services:
     container_name: traffic-backend
     restart: always
     ports:
-      - "3000:3000"
+      - "4000:3000"
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/trafficdb
       REDIS_HOST: redis

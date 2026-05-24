@@ -1,16 +1,25 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { createClient } from 'redis';
+import { createClient, RedisClientType } from 'redis';
 
 @Injectable()
 export class RedisService implements OnModuleInit {
-  private client;
+  private client!: RedisClientType;
 
   async onModuleInit() {
     this.client = createClient({
-      url: 'redis://localhost:6379',
+      socket: {
+        host: process.env.REDIS_HOST || 'localhost',
+        port: Number(process.env.REDIS_PORT) || 6379,
+      },
+    });
+
+    this.client.on('error', (err) => {
+      console.error('Redis Error:', err);
     });
 
     await this.client.connect();
+
+    console.log('✅ Redis Connected');
   }
 
   async get(key: string) {
@@ -19,7 +28,9 @@ export class RedisService implements OnModuleInit {
   }
 
   async set(key: string, value: any, ttl = 60) {
-    await this.client.set(key, JSON.stringify(value), { EX: ttl });
+    await this.client.set(key, JSON.stringify(value), {
+      EX: ttl,
+    });
   }
 
   async del(key: string) {
